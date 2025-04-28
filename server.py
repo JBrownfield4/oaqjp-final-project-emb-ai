@@ -12,11 +12,8 @@ def emotion_detection():
     label = response['label']
     score = response['emotions']
 
-    return (
-        f"For the given statement, the system response is 'anger': {formated_response['anger']} "
-        f"'disgust': {formated_response['disgust']}, 'fear': {formated_response['fear']}, "
-        f"'joy': {formated_response['joy']} and 'sadness': {formated_response['sadness']}. "
-        f"The dominant emotion is {formated_response['dominant_emotion']}.".format(label.split('_')[1], score))
+    return "For the given statement, the system response is 'anger': {formated_response['anger']} 'disgust': {formated_response['disgust']}, 'fear': {formated_response['fear']}, 'joy': {formated_response['joy']} and 'sadness': {formated_response['sadness']}. The dominant emotion is {formated_response['dominant_emotion']}."
+
 
 @app.route("/")
 def render_index_page():
