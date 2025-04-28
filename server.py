@@ -7,7 +7,7 @@ app = Flask("Emotion Detection")
 def emotion_detection():
     analyzed_text = request.args.get('textToAnalyze')
 
-    response = emotion_detector(analyzed_text)
+    response = emotion_detection(analyzed_text)
     
     anger = response["anger"]
     disgust = response["disgust"]
