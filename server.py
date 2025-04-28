@@ -5,21 +5,22 @@ app = Flask("Emotion Detection")
 
 @app.route('/emotionDetection')
 def emotion_detection():
-    analyzed_text = request.args.get('textToAnalyze')
+    text_to_analyze = request.args.get('textToAnalyze')
 
-    response = emotion_detection(analyzed_text)
-    
-    anger = response["anger"]
-    disgust = response["disgust"]
-    fear = response["fear"]
-    joy = response["joy"]
-    sadness = response["sadness"]
-    dominant_emotion = response["dominant_emotion"]
+    response = emotion_detection(text_to_analyze)
 
-    if dominant_emotion == None:
-        return "Invalid input! Try again."
-    else:
-        return "For the given statement, the system response is 'anger': {}, 'disgust': {}, 'fear': {}, 'joy': {} and 'sadness': {}. The dominant emotion is {}.".format(anger, disgust, fear, joy, sadness, dominant_emotion)
+    label = response['label']
+    score = response['emotions']
+
+    return (
+        f"For the given statement, the system response is 'anger': {formated_response['anger']} "
+        f"'disgust': {formated_response['disgust']}, 'fear': {formated_response['fear']}, "
+        f"'joy': {formated_response['joy']} and 'sadness': {formated_response['sadness']}. "
+        f"The dominant emotion is {formated_response['dominant_emotion']}.".format(label.split('_')[1], score))
+
+@app.route("/")
+def render_index_page():
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)
